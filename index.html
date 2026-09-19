@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LPU College Connect</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+:root{
+    --primary:#6d28d9;
+    --secondary:#8b5cf6;
+    --bg:#f5f7fb;
+    --card:#ffffff;
+    --text:#1f2937;
+    --muted:#6b7280;
+    --border:#e5e7eb;
+    --success:#16a34a;
+    --danger:#dc2626;
+}
+
+body{
+    background:var(--bg);
+    color:var(--text);
+    transition:.3s;
+}
+
+body.dark{
+    --bg:#111827;
+    --card:#1f2937;
+    --text:#f9fafb;
+    --muted:#cbd5e1;
+    --border:#374151;
+}
+
+/* HEADER */
+header{
+    height:70px;
+    background:var(--card);
+    border-bottom:1px solid var(--border);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 30px;
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:22px;
+    font-weight:bold;
+    color:var(--primary);
+}
+
+.logo-icon{
+    width:40px;
+    height:40px;
+    border-radius:12px;
+    background:linear-gradient(135deg,var(--primary),var(--secondary));
+    color:white;
+    display:grid;
+    place-items:center;
+    font-weight:bold;
+}
+
+.header-right{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.search{
+    background:var(--bg);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:10px 14px;
+    width:240px;
+    color:var(--text);
+    outline:none;
+}
+
+.icon-btn{
+    border:1px solid var(--border);
+    background:var(--card);
+    color:var(--text);
+    width:40px;
+    height:40px;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:18px;
+}
+
+.profile{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    cursor:pointer;
+}
+
+.avatar{
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#7c3aed,#ec4899);
+    color:white;
+    display:grid;
+    place-items:center;
+    font-weight:bold;
+}
+
+/* LAYOUT */
+.layout{
+    display:flex;
+    min-height:calc(100vh - 70px);
+}
+
+.sidebar{
+    width:240px;
+    background:var(--card);
+    border-right:1px solid var(--border);
+    padding:25px 15px;
+    position:fixed;
+    top:70px;
+    bottom:0;
+    overflow-y:auto;
+}
+
+.nav-title{
+    color:var(--muted);
+    font-size:12px;
+    margin:10px 12px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+}
+
+.nav-item{
+    padding:12px 15px;
+    margin:5px 0;
+    border-radius:10px;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    color:var(--muted);
+}
+
+.nav-item:hover,
+.nav-item.active{
+    background:#ede9fe;
+    color:var(--primary);
+}
+
+body.dark .nav-item:hover,
+body.dark .nav-item.active{
+    background:#312e81;
+    color:white;
+}
+
+.main{
+    margin-left:240px;
+    width:calc(100% - 240px);
+    padding:30px;
+}
+
+/* HERO */
+.hero{
+    background:linear-gradient(135deg,#5b21b6,#7c3aed,#a855f7);
+    color:white;
+    border-radius:20px;
+    padding:35px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    overflow:hidden;
+}
+
+.hero h1{
+    font-size:34px;
+    margin-bottom:10px;
+}
+
+.hero p{
+    opacity:.9;
+    max-width:650px;
+    line-height:1.6;
+}
+
+.hero button{
+    margin-top:20px;
+    border:0;
+    padding:12px 20px;
+    border-radius:10px;
+    background:white;
+    color:#6d28d9;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.hero-art{
+    font-size:100px;
+    opacity:.2;
+}
+
+/* STATS */
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+    margin:25px 0;
+}
+
+.stat{
+    background:var(--card);
+    padding:20px;
+    border:1px solid var(--border);
+    border-radius:15px;
+}
+
+.stat-top{
+    display:flex;
+    justify-content:space-between;
+}
+
+.stat-icon{
+    width:45px;
+    height:45px;
+    border-radius:12px;
+    background:#ede9fe;
+    color:var(--primary);
+    display:grid;
+    place-items:center;
+    font-size:21px;
+}
+
+.stat h2{
+    margin-top:15px;
+}
+
+.stat small{
+    color:var(--muted);
+}
+
+/* GRID */
+.content-grid{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:22px;
+}
+
+.card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:22px;
+    margin-bottom:22px;
+}
+
+.card-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:18px;
+}
+
+.card-header h2{
+    font-size:19px;
+}
+
+.view{
+    color:var(--primary);
+    cursor:pointer;
+    font-size:14px;
+}
+
+/* EVENTS */
+.event{
+    display:flex;
+    gap:15px;
+    padding:15px 0;
+    border-bottom:1px solid var(--border);
+}
+
+.event:last-child{
+    border-bottom:0;
+}
+
+.date{
+    min-width:58px;
+    height:65px;
+    border-radius:12px;
+    background:#ede9fe;
+    color:var(--primary);
+    display:grid;
+    place-items:center;
+    text-align:center;
+    font-weight:bold;
+}
+
+.event-info{
+    flex:1;
+}
+
+.event-info h3{
+    margin-bottom:6px;
+}
+
+.event-info p{
+    color:var(--muted);
+    font-size:14px;
+}
+
+.event button{
+    height:38px;
+    padding:0 14px;
+    border:0;
+    border-radius:8px;
+    background:var(--primary);
+    color:white;
+    cursor:pointer;
+}
+
+/* NOTICE */
+.notice{
+    padding:13px 0;
+    border-bottom:1px solid var(--border);
+}
+
+.notice:last-child{
+    border-bottom:0;
+}
+
+.notice strong{
+    display:block;
+    margin-bottom:5px;
+}
+
+.notice small{
+    color:var(--muted);
+}
+
+/* CLUBS */
+.clubs{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+}
+
+.club{
+    border:1px solid var(--border);
+    padding:15px;
+    border-radius:12px;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.club:hover{
+    transform:translateY(-3px);
+    box-shadow:0 5px 15px #00000012;
+}
+
+.club-icon{
+    font-size:25px;
+    margin-bottom:8px;
+}
+
+.club p{
+    font-size:13px;
+    color:var(--muted);
+    margin-top:4px;
+}
+
+/* CONNECT */
+.student{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:12px 0;
+    border-bottom:1px solid var(--border);
+}
+
+.student:last-child{
+    border-bottom:0;
+}
+
+.student-info{
+    flex:1;
+}
+
+.student-info small{
+    color:var(--muted);
+}
+
+.connect-btn{
+    border:1px solid var(--primary);
+    background:transparent;
+    color:var(--primary);
+    padding:7px 11px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.connect-btn.connected{
+    background:var(--primary);
+    color:white;
+}
+
+/* MAP */
+.map{
+    height:220px;
+    border-radius:13px;
+    background:
+      linear-gradient(45deg,#dbeafe 25%,transparent 25%),
+      linear-gradient(-45deg,#dbeafe 25%,transparent 25%),
+      #eff6ff;
+    background-size:40px 40px;
+    position:relative;
+    overflow:hidden;
+}
+
+.map-place{
+    position:absolute;
+    background:white;
+    color:#111827;
+    padding:7px 10px;
+    border-radius:8px;
+    box-shadow:0 3px 10px #0002;
+    font-size:12px;
+    cursor:pointer;
+}
+
+.p1{top:20px;left:25px}
+.p2{top:90px;left:140px}
+.p3{top:35px;right:25px}
+.p4{bottom:25px;left:80px}
+.p5{bottom:25px;right:50px}
+
+/* MODAL */
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:#0008;
+    z-index:2000;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-box{
+    width:450px;
+    max-width:100%;
+    background:var(--card);
+    border-radius:18px;
+    padding:25px;
+    position:relative;
+}
+
+.close{
+    position:absolute;
+    right:18px;
+    top:15px;
+    border:0;
+    background:none;
+    color:var(--text);
+    font-size:25px;
+    cursor:pointer;
+}
+
+.modal-box input,
+.modal-box select{
+    width:100%;
+    padding:12px;
+    margin:8px 0 15px;
+    border:1px solid var(--border);
+    border-radius:9px;
+    background:var(--bg);
+    color:var(--text);
+}
+
+.primary-btn{
+    width:100%;
+    padding:12px;
+    border:0;
+    border-radius:9px;
+    background:var(--primary);
+    color:white;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+/* TOAST */
+.toast{
+    position:fixed;
+    right:25px;
+    bottom:25px;
+    background:#111827;
+    color:white;
+    padding:14px 20px;
+    border-radius:10px;
+    transform:translateY(100px);
+    opacity:0;
+    transition:.3s;
+    z-index:3000;
+}
+
+.toast.show{
+    transform:translateY(0);
+    opacity:1;
+}
+
+/* MOBILE */
+.mobile-menu{
+    display:none;
+}
+
+@media(max-width:1000px){
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .content-grid{
+        grid-template-columns:1fr;
+    }
+
+    .hero-art{
+        display:none;
+    }
+}
+
+@media(max-width:700px){
+    header{
+        padding:0 15px;
+    }
+
+    .search{
+        display:none;
+    }
+
+    .sidebar{
+        transform:translateX(-100%);
+        transition:.3s;
+        z-index:1500;
+    }
+
+    .sidebar.open{
+        transform:translateX(0);
+    }
+
+    .mobile-menu{
+        display:block;
+    }
+
+    .main{
+        margin-left:0;
+        width:100%;
+        padding:18px;
+    }
+
+    .hero{
+        padding:25px;
+    }
+
+    .hero h1{
+        font-size:27px;
+    }
+
+    .stats{
+        grid-template-columns:1fr 1fr;
+        gap:10px;
+    }
+
+    .clubs{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:450px){
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+    .profile span{
+        display:none;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+    <div class="logo">
+        <button class="icon-btn mobile-menu" onclick="toggleSidebar()">☰</button>
+        <div class="logo-icon">L</div>
+        <span>College Connect</span>
+    </div>
+
+    <div class="header-right">
+        <input id="searchBox" class="search" placeholder="Search students, clubs, events...">
+        <button class="icon-btn" onclick="toggleDark()">◐</button>
+        <button class="icon-btn" onclick="showToast('You have 3 new notifications')">🔔</button>
+
+        <div class="profile" onclick="openModal('profileModal')">
+            <div class="avatar">BS</div>
+            <span>Bhaskar</span>
+        </div>
+    </div>
+</header>
+
+<div class="layout">
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+
+    <div class="nav-title">Main</div>
+
+    <div class="nav-item active" onclick="changeSection('Dashboard',this)">
+        🏠 Dashboard
+    </div>
+
+    <div class="nav-item" onclick="changeSection('My Profile',this)">
+        👤 My Profile
+    </div>
+
+    <div class="nav-item" onclick="changeSection('Students',this)">
+        👥 Students
+    </div>
+
+    <div class="nav-item" onclick="changeSection('Events',this)">
+        📅 Events
+    </div>
+
+    <div class="nav-title">Campus</div>
+
+    <div class="nav-item" onclick="changeSection('Clubs',this)">
+        🏆 Clubs & Societies
+    </div>
+
+    <div class="nav-item" onclick="changeSection('Campus Map',this)">
+        🗺️ Campus Map
+    </div>
+
+    <div class="nav-item" onclick="changeSection('Resources',this)">
+        📚 Resources
+    </div>
+
+    <div class="nav-item" onclick="changeSection('Help Center',this)">
+        🆘 Help Center
+    </div>
+
+    <div class="nav-title">Account</div>
+
+    <div class="nav-item" onclick="openModal('settingsModal')">
+        ⚙️ Settings
+    </div>
+
+    <div class="nav-item" onclick="showToast('Logged out successfully')">
+        🚪 Logout
+    </div>
+
+</aside>
+
+<!-- MAIN -->
+<main class="main">
+
+<!-- HERO -->
+<section class="hero">
+    <div>
+        <h1>Welcome to LPU College Connect 👋</h1>
+        <p>
+            One digital platform for LPU students to connect with classmates,
+            discover campus events, join clubs, explore resources and stay
+            updated with university life.
+        </p>
+        <button onclick="openModal('eventModal')">Explore Campus →</button>
+    </div>
+
+    <div class="hero-art">🎓</div>
+</section>
+
+<!-- STATS -->
+<section class="stats">
+
+    <div class="stat">
+        <div class="stat-top">
+            <div>
+                <small>Students Connected</small>
+                <h2>12,540</h2>
+            </div>
+            <div class="stat-icon">👥</div>
+        </div>
+    </div>
+
+    <div class="stat">
+        <div class="stat-top">
+            <div>
+                <small>Active Events</small>
+                <h2>48</h2>
+            </div>
+            <div class="stat-icon">📅</div>
+        </div>
+    </div>
+
+    <div class="stat">
+        <div class="stat-top">
+            <div>
+                <small>Clubs</small>
+                <h2>120+</h2>
+            </div>
+            <div class="stat-icon">🏆</div>
+        </div>
+    </div>
+
+    <div class="stat">
+        <div class="stat-top">
+            <div>
+                <small>Campus Resources</small>
+                <h2>350+</h2>
+            </div>
+            <div class="stat-icon">📚</div>
+        </div>
+    </div>
+
+</section>
+
+<div class="content-grid">
+
+<!-- LEFT -->
+<div>
+
+<!-- EVENTS -->
+<div class="card">
+    <div class="card-header">
+        <h2>Upcoming Events</h2>
+        <span class="view" onclick="showToast('Opening all events...')">View All</span>
+    </div>
+
+    <div class="event">
+        <div class="date">
+            <span>SEP</span>
+            <strong>22</strong>
+        </div>
+
+        <div class="event-info">
+            <h3>Hackathon 2026</h3>
+            <p>📍 Uni Auditorium · 10:00 AM</p>
+        </div>
+
+        <button onclick="registerEvent('Hackathon 2026')">Join</button>
+    </div>
+
+    <div class="event">
+        <div class="date">
+            <span>SEP</span>
+            <strong>25</strong>
+        </div>
+
+        <div class="event-info">
+            <h3>Tech Innovation Summit</h3>
+            <p>📍 Shanti Devi Mittal Auditorium · 11:00 AM</p>
+        </div>
+
+        <button onclick="registerEvent('Tech Innovation Summit')">Join</button>
+    </div>
+
+    <div class="event">
+        <div class="date">
+            <span>SEP</span>
+            <strong>28</strong>
+        </div>
+
+        <div class="event-info">
+            <h3>Freshers Cultural Night</h3>
+            <p>📍 Campus Ground · 6:00 PM</p>
+        </div>
+
+        <button onclick="registerEvent('Freshers Cultural Night')">Join</button>
+    </div>
+</div>
+
+<!-- CLUBS -->
+<div class="card">
+    <div class="card-header">
+        <h2>Popular Clubs</h2>
+        <span class="view">Explore</span>
+    </div>
+
+    <div class="clubs">
+
+        <div class="club" onclick="joinClub('Code Warriors')">
+            <div class="club-icon">💻</div>
+            <strong>Code Warriors</strong>
+            <p>Programming & DSA</p>
+        </div>
+
+        <div class="club" onclick="joinClub('Robotics Club')">
+            <div class="club-icon">🤖</div>
+            <strong>Robotics Club</strong>
+            <p>Robotics & AI</p>
+        </div>
+
+        <div class="club" onclick="joinClub('Design Society')">
+            <div class="club-icon">🎨</div>
+            <strong>Design Society</strong>
+            <p>UI/UX & Creativity</p>
+        </div>
+
+        <div class="club" onclick="joinClub('Entrepreneurship Cell')">
+            <div class="club-icon">🚀</div>
+            <strong>Entrepreneurship Cell</strong>
+            <p>Startups & Innovation</p>
+        </div>
+
+    </div>
+</div>
+
+<!-- CAMPUS MAP -->
+<div class="card">
+    <div class="card-header">
+        <h2>Campus Navigation</h2>
+        <span class="view" onclick="showToast('Campus navigation opened')">Open Map</span>
+    </div>
+
+    <div class="map">
+
+        <div class="map-place p1" onclick="mapPlace('Central Library')">
+            📚 Central Library
+        </div>
+
+        <div class="map-place p2" onclick="mapPlace('Uni Mall')">
+            🛍️ Uni Mall
+        </div>
+
+        <div class="map-place p3" onclick="mapPlace('Academic Block')">
+            🏫 Academic Block
+        </div>
+
+        <div class="map-place p4" onclick="mapPlace('Hostel')">
+            🛏️ Hostel
+        </div>
+
+        <div class="map-place p5" onclick="mapPlace('Sports Complex')">
+            ⚽ Sports
+        </div>
+
+    </div>
+</div>
+
+</div>
+
+<!-- RIGHT -->
+<div>
+
+<!-- NOTICES -->
+<div class="card">
+    <div class="card-header">
+        <h2>Latest Notices</h2>
+        <span class="view">All</span>
+    </div>
+
+    <div class="notice">
+        <strong>📢 Semester registration update</strong>
+        <small>Academic registration information is available.</small>
+    </div>
+
+    <div class="notice">
+        <strong>💳 Fee payment reminder</strong>
+        <small>Check your student portal for details.</small>
+    </div>
+
+    <div class="notice">
+        <strong>🏆 Hackathon registrations open</strong>
+        <small>Register your team before the deadline.</small>
+    </div>
+
+    <div class="notice">
+        <strong>📚 Library timings updated</strong>
+        <small>Check the latest campus schedule.</small>
+    </div>
+</div>
+
+<!-- STUDENTS -->
+<div class="card">
+    <div class="card-header">
+        <h2>Connect with Students</h2>
+        <span class="view">Discover</span>
+    </div>
+
+    <div class="student">
+        <div class="avatar">AS</div>
+
+        <div class="student-info">
+            <strong>Aditya Sharma</strong>
+            <small>B.Tech CSE · 2nd Year</small>
+        </div>
+
+        <button class="connect-btn" onclick="connectStudent(this,'Aditya Sharma')">
+            Connect
+        </button>
+    </div>
+
+    <div class="student">
+        <div class="avatar">RK</div>
+
+        <div class="student-info">
+            <strong>Riya Kapoor</strong>
+            <small>B.Tech CSE · 1st Year</small>
+        </div>
+
+        <button class="connect-btn" onclick="connectStudent(this,'Riya Kapoor')">
+            Connect
+        </button>
+    </div>
+
+    <div class="student">
+        <div class="avatar">AM</div>
+
+        <div class="student-info">
+            <strong>Arjun Mehta</strong>
+            <small>B.Tech ECE · 3rd Year</small>
+        </div>
+
+        <button class="connect-btn" onclick="connectStudent(this,'Arjun Mehta')">
+            Connect
+        </button>
+    </div>
+</div>
+
+<!-- QUICK ACTIONS -->
+<div class="card">
+    <div class="card-header">
+        <h2>Quick Actions</h2>
+    </div>
+
+    <button class="primary-btn" onclick="openModal('eventModal')">
+        + Create / Register Event
+    </button>
+
+    <br><br>
+
+    <button class="primary-btn" onclick="showToast('Resource center opened')">
+        📚 Open Resources
+    </button>
+
+    <br><br>
+
+    <button class="primary-btn" onclick="showToast('Help request created')">
+        🆘 Get Campus Help
+    </button>
+</div>
+
+</div>
+
+</div>
+
+</main>
+</div>
+
+<!-- EVENT MODAL -->
+<div class="modal" id="eventModal">
+    <div class="modal-box">
+        <button class="close" onclick="closeModal('eventModal')">×</button>
+
+        <h2>Campus Event</h2>
+        <p style="color:var(--muted);margin:8px 0 20px;">
+            Register for an LPU campus event.
+        </p>
+
+        <label>Full Name</label>
+        <input id="eventName" placeholder="Enter your name">
+
+        <label>Select Event</label>
+        <select id="eventSelect">
+            <option>Hackathon 2026</option>
+            <option>Tech Innovation Summit</option>
+            <option>Freshers Cultural Night</option>
+        </select>
+
+        <button class="primary-btn" onclick="submitRegistration()">
+            Register Now
+        </button>
+    </div>
+</div>
+
+<!-- PROFILE MODAL -->
+<div class="modal" id="profileModal">
+    <div class="modal-box">
+        <button class="close" onclick="closeModal('profileModal')">×</button>
+
+        <h2>My Profile</h2>
+
+        <div style="text-align:center;margin:20px;">
+            <div class="avatar" style="width:80px;height:80px;margin:auto;font-size:25px;">
+                BS
+            </div>
+            <h3 style="margin-top:10px;">Bhaskar</h3>
+            <p style="color:var(--muted);">B.Tech CSE · LPU</p>
+        </div>
+
+        <button class="primary-btn" onclick="showToast('Profile editing enabled')">
+            Edit Profile
+        </button>
+    </div>
+</div>
+
+<!-- SETTINGS MODAL -->
+<div class="modal" id="settingsModal">
+    <div class="modal-box">
+        <button class="close" onclick="closeModal('settingsModal')">×</button>
+
+        <h2>Settings</h2>
+
+        <label>Notification Preference</label>
+
+        <select onchange="showToast('Notification preference updated')">
+            <option>All Notifications</option>
+            <option>Important Only</option>
+            <option>Mute</option>
+        </select>
+
+        <button class="primary-btn" onclick="toggleDark();closeModal('settingsModal')">
+            Toggle Dark Mode
+        </button>
+    </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+
+/* SIDEBAR */
+function toggleSidebar(){
+    document.getElementById("sidebar").classList.toggle("open");
+}
+
+/* DARK MODE */
+function toggleDark(){
+    document.body.classList.toggle("dark");
+
+    const mode = document.body.classList.contains("dark")
+        ? "Dark mode enabled"
+        : "Light mode enabled";
+
+    showToast(mode);
+}
+
+/* TOAST */
+function showToast(message){
+
+    const toast = document.getElementById("toast");
+
+    toast.textContent = message;
+    toast.classList.add("show");
+
+    setTimeout(()=>{
+        toast.classList.remove("show");
+    },2500);
+}
+
+/* MODAL */
+function openModal(id){
+    document.getElementById(id).classList.add("show");
+}
+
+function closeModal(id){
+    document.getElementById(id).classList.remove("show");
+}
+
+/* EVENT REGISTRATION */
+function registerEvent(eventName){
+
+    document.getElementById("eventSelect").value = eventName;
+
+    openModal("eventModal");
+}
+
+function submitRegistration(){
+
+    const name = document.getElementById("eventName").value;
+    const event = document.getElementById("eventSelect").value;
+
+    if(name.trim()===""){
+        showToast("Please enter your name");
+        return;
+    }
+
+    closeModal("eventModal");
+
+    showToast("Registered for " + event + " successfully!");
+}
+
+/* CLUB */
+function joinClub(name){
+    showToast("Welcome to " + name + "!");
+}
+
+/* STUDENT CONNECTION */
+function connectStudent(button,name){
+
+    if(button.classList.contains("connected")){
+
+        button.classList.remove("connected");
+        button.textContent="Connect";
+
+        showToast("Disconnected from " + name);
+
+    }else{
+
+        button.classList.add("connected");
+        button.textContent="Connected";
+
+        showToast("Connection request sent to " + name);
+    }
+}
+
+/* MAP */
+function mapPlace(place){
+    showToast("Selected: " + place);
+}
+
+/* SIDEBAR SECTION */
+function changeSection(section,element){
+
+    document.querySelectorAll(".nav-item").forEach(item=>{
+        item.classList.remove("active");
+    });
+
+    element.classList.add("active");
+
+    if(window.innerWidth <= 700){
+        toggleSidebar();
+    }
+
+    showToast(section + " section selected");
+}
+
+/* SEARCH */
+document.getElementById("searchBox").addEventListener("input",function(){
+
+    const query=this.value.toLowerCase();
+
+    const items=document.querySelectorAll(
+        ".event-info h3,.notice strong,.club strong,.student-info strong"
+    );
+
+    items.forEach(item=>{
+
+        const parent =
+            item.closest(".event") ||
+            item.closest(".notice") ||
+            item.closest(".club") ||
+            item.closest(".student");
+
+        if(item.textContent.toLowerCase().includes(query)){
+            parent.style.display="";
+        }else{
+            parent.style.display="none";
+        }
+    });
+});
+
+/* CLOSE MODAL WHEN CLICKING OUTSIDE */
+document.querySelectorAll(".modal").forEach(modal=>{
+
+    modal.addEventListener("click",function(e){
+
+        if(e.target===modal){
+            modal.classList.remove("show");
+        }
+
+    });
+
+});
+
+/* WELCOME */
+setTimeout(()=>{
+    showToast("Welcome to LPU College Connect 🎓");
+},1000);
+
+</script>
+
+</body>
+</html>

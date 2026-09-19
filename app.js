@@ -1,34 +1,28 @@
-const jwt = require("jsonwebtoken");
+const express = require("express");
+const cors = require("cors");
+require("dotenv").config();
 
-function auth(req, res, next) {
+// Agar db.js mein database connection code hai
+require("./db"); 
 
-    const header = req.headers.authorization;
+const app = express();
 
-    if (!header || !header.startsWith("Bearer ")) {
-        return res.status(401).json({
-            message: "Authentication required"
-        });
-    }
+app.use(cors());
+app.use(express.json());
 
-    const token = header.split(" ")[1];
+// Routes import aur use karein (check kar lein routes.js file ka naam)
+const routes = require("./routes");
+app.use("/api", routes);
 
-    try {
+// index.html serve karne ke liye (agar frontend serve karna hai)
+const path = require("path");
+app.use(express.static(__dirname));
 
-        const decoded = jwt.verify(
-            token,
-            process.env.JWT_SECRET
-        );
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "index.html"));
+});
 
-        req.user = decoded;
-
-        next();
-
-    } catch (error) {
-
-        return res.status(401).json({
-            message: "Invalid or expired token"
-        });
-    }
-}
-
-module.exports = auth;
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
